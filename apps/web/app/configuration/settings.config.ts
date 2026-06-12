@@ -79,6 +79,7 @@ export default {
   storename: process.env.NAME || 'PlentyONE GmbH',
   logoWidth: process.env.NUXT_PUBLIC_LOGO_WIDTH || 'auto',
   logoHeight: process.env.NUXT_PUBLIC_LOGO_HEIGHT || '50',
+  searchMaxWidth: process.env.NUXT_PUBLIC_SEARCH_MAX_WIDTH || 'auto',
   font: process.env.NUXT_PUBLIC_FONT || 'Red Hat Text',
   verticalBlockSize: process.env.NUXT_PUBLIC_VERTICAL_BLOCK_SIZE || 'm',
   horizontalBlockSize: process.env.NUXT_PUBLIC_HORIZONTAL_BLOCK_SIZE || 's',

@@ -92,7 +92,7 @@
           v-if="isSectionVisible('search')"
           ref="iconSearchContainerRef"
           class="flex items-center justify-center min-w-0"
-          :style="slotStyle('search')"
+          :style="[slotStyle('search'), searchMaxWidthStyle]"
         >
           <template v-if="isFullSearchMode">
             <UiSearch class="w-full" />
@@ -392,6 +392,12 @@ const headerPaletteStyle = useGenerateTailwindPalette('header', headerBackground
 
 const { getSetting: getHorizontalBlockSize } = useSiteSettings('horizontalBlockSize');
 const containerWidthClass = computed(() => getHorizontalClass(getHorizontalBlockSize()));
+
+const { getSetting: getSearchMaxWidth } = useSiteSettings('searchMaxWidth');
+const searchMaxWidthStyle = computed(() => {
+  const dimension = toCssDimension(getSearchMaxWidth());
+  return dimension === 'auto' ? {} : { maxWidth: dimension };
+});
 
 const NuxtLink = resolveComponent('NuxtLink');
 const route = useRoute();

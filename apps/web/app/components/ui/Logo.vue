@@ -33,16 +33,9 @@ const { getSetting: getLogoHeight } = useSiteSettings('logoHeight');
 
 const headerLogo = computed(() => getHeaderLogo());
 
-// Accepts a raw pixel number (e.g. "150"), an explicit unit ("150px"), or "auto"/empty for proportional scaling.
-const toDimension = (value: string): string => {
-  const trimmed = (value ?? '').toString().trim();
-  if (!trimmed || trimmed.toLowerCase() === 'auto') return 'auto';
-  return /^\d+(\.\d+)?$/.test(trimmed) ? `${trimmed}px` : trimmed;
-};
-
 const logoStyle = computed(() => ({
-  width: toDimension(getLogoWidth()),
-  height: toDimension(getLogoHeight()),
+  width: toCssDimension(getLogoWidth()),
+  height: toCssDimension(getLogoHeight()),
 }));
 
 const storeName = runtimeConfig.public.storename;
