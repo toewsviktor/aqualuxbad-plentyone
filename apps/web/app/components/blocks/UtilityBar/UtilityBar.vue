@@ -92,10 +92,10 @@
           v-if="isSectionVisible('search')"
           ref="iconSearchContainerRef"
           class="flex items-center justify-center min-w-0"
-          :style="[slotStyle('search'), searchMaxWidthStyle]"
+          :style="slotStyle('search')"
         >
           <template v-if="isFullSearchMode">
-            <UiSearch class="w-full" />
+            <UiSearch class="w-full" :style="searchMaxWidthStyle" />
           </template>
 
           <template v-else>
@@ -427,7 +427,7 @@ const slotStyle = (sectionId: string) => {
   const isMiddleSlot = order === 1 && sections.value.filter((section) => section.visible).length === 3;
 
   if (isMiddleSlot) {
-    return { order, flex: '5', marginLeft: '16px', marginRight: '16px' };
+    return { order, flex: '1 1 0%', minWidth: '0', marginLeft: '16px', marginRight: '16px' };
   }
 
   const isTabletSearchSide = sectionId === 'search' && viewport.isGreaterOrEquals('md') && viewport.isLessThan('lg');
@@ -435,7 +435,8 @@ const slotStyle = (sectionId: string) => {
     return { order, flex: '1', minWidth: '220px' };
   }
 
-  return { order, flex: '1' };
+  // Side slots (logo, actions) hug their edge and must not grow, so they stay pinned left/right
+  return { order, flex: '0 0 auto' };
 };
 
 const expandIconSearch = () => {
