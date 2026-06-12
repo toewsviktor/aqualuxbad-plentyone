@@ -77,6 +77,8 @@ export default {
     process.env.LOGO ||
     'https://cdn02.plentymarkets.com/mevofvd5omld/frontend/Logo/logo.svg',
   storename: process.env.NAME || 'PlentyONE GmbH',
+  logoMaxWidth: process.env.NUXT_PUBLIC_LOGO_MAX_WIDTH || '180',
+  logoMaxHeight: process.env.NUXT_PUBLIC_LOGO_MAX_HEIGHT || '50',
   font: process.env.NUXT_PUBLIC_FONT || 'Red Hat Text',
   verticalBlockSize: process.env.NUXT_PUBLIC_VERTICAL_BLOCK_SIZE || 'm',
   horizontalBlockSize: process.env.NUXT_PUBLIC_HORIZONTAL_BLOCK_SIZE || 's',

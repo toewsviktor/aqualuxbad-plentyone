@@ -287,14 +287,18 @@ const navigationRootStyle = computed(() => ({
     : undefined,
 }));
 
+const { getSetting: getHorizontalBlockSize } = useSiteSettings('horizontalBlockSize');
+const containerWidthClass = computed(() => getHorizontalClass(getHorizontalBlockSize()));
+
 const navigationContainerClasses = computed(() => {
+  const base = `flex flex-wrap w-full mx-auto border-b nav-border border-b-solid ${containerWidthClass.value}`;
   switch (resolvedContent.value.text.textAlignment) {
     case 'center':
-      return 'flex flex-wrap justify-center border-b nav-border border-b-solid';
+      return `${base} justify-center`;
     case 'right':
-      return 'flex flex-wrap justify-end border-b nav-border border-b-solid';
+      return `${base} justify-end`;
     default:
-      return 'flex flex-wrap justify-start border-b nav-border border-b-solid';
+      return `${base} justify-start`;
   }
 });
 

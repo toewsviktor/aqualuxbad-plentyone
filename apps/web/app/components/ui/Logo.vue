@@ -5,7 +5,8 @@
         ref="logo"
         :src="headerLogo"
         :alt="`${storeName} logo`"
-        class="w-100 py-2"
+        class="py-2"
+        :style="logoStyle"
         width="150"
         height="40"
         preload
@@ -19,7 +20,7 @@
         :alt="`${storeName} logo`"
         :width="imgWidth"
         :height="imgHeight"
-        class="max-h-[100px] max-w-[200px]"
+        :style="logoStyle"
         preload
       />
     </template>
@@ -29,8 +30,17 @@
 <script setup lang="ts">
 const runtimeConfig = useRuntimeConfig();
 const { getSetting: getHeaderLogo } = useSiteSettings('headerLogo');
+const { getSetting: getLogoMaxWidth } = useSiteSettings('logoMaxWidth');
+const { getSetting: getLogoMaxHeight } = useSiteSettings('logoMaxHeight');
 
 const headerLogo = computed(() => getHeaderLogo());
+
+const logoStyle = computed(() => ({
+  maxWidth: `${getLogoMaxWidth()}px`,
+  maxHeight: `${getLogoMaxHeight()}px`,
+  width: 'auto',
+  height: 'auto',
+}));
 
 const storeName = runtimeConfig.public.storename;
 

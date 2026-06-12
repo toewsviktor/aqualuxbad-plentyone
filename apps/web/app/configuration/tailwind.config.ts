@@ -12,6 +12,9 @@ export default {
     {
       pattern: /^col-span-(1[0-2]|[1-9])$/,
     },
+    'max-w-screen-xl',
+    'max-w-screen-2xl',
+    'max-w-screen-3xl',
   ],
   theme: {
     extend: {

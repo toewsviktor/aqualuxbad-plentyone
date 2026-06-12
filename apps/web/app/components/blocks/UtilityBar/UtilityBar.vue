@@ -1,6 +1,9 @@
 <template>
   <div :style="headerPaletteStyle">
-    <header class="relative w-full @md:sticky @md:shadow-md z-raised">
+    <header
+      class="relative w-full @md:sticky @md:shadow-md z-raised"
+      :style="{ backgroundColor: headerBackgroundColor }"
+    >
       <div
         v-if="viewport.isLessThan('md')"
         class="flex items-center w-full"
@@ -57,8 +60,8 @@
 
       <div
         v-else
-        class="flex items-center flex-nowrap w-full border-0 border-neutral-200"
-        :style="{ backgroundColor: headerBackgroundColor, ...paddingStyles }"
+        :class="['flex items-center flex-nowrap w-full mx-auto border-0 border-neutral-200', containerWidthClass]"
+        :style="{ ...paddingStyles }"
         data-testid="navbar-top-desktop"
       >
         <UiButton
@@ -386,6 +389,9 @@ const {
 const iconColor = computed(() => content.value?.color?.iconColor || '');
 const headerBackgroundColor = computed(() => content.value?.color?.backgroundColor || '');
 const headerPaletteStyle = useGenerateTailwindPalette('header', headerBackgroundColor);
+
+const { getSetting: getHorizontalBlockSize } = useSiteSettings('horizontalBlockSize');
+const containerWidthClass = computed(() => getHorizontalClass(getHorizontalBlockSize()));
 
 const NuxtLink = resolveComponent('NuxtLink');
 const route = useRoute();
