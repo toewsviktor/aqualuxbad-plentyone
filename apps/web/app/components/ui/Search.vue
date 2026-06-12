@@ -9,6 +9,7 @@
         :aria-label="t('common.actions.search')"
         :placeholder="t('common.actions.search')"
         @focus="handleOpen"
+        @keydown.esc="handleReset"
       >
         <template #prefix>
           <SfLoaderCircular v-if="loading || loadingSuggestions" class="shrink-0" aria-hidden="true" />
