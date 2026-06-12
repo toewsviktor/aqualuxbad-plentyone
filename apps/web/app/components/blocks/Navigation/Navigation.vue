@@ -4,7 +4,13 @@
       <ul :class="navigationContainerClasses" :style="navigationContainerStyle" @focusout="onNavBlur">
         <li v-if="categoryTree.length === 0" class="h-10" />
 
-        <li v-for="(menuNode, index) in categoryTree" v-else :key="index" @mouseenter="onCategoryMouseEnter(menuNode)">
+        <li
+          v-for="(menuNode, index) in categoryTree"
+          v-else
+          :key="index"
+          class="relative"
+          @mouseenter="onCategoryMouseEnter(menuNode)"
+        >
           <NuxtLink
             v-if="menuNode.childCount > 0"
             ref="triggerReference"
@@ -56,10 +62,10 @@
             "
             :key="activeMenu.id"
             ref="megaMenuReference"
-            :style="{ ...style, backgroundColor: resolvedContent.color.backgroundColor || 'white' }"
+            :style="{ backgroundColor: resolvedContent.color.backgroundColor || 'white' }"
             :class="[
-              'hidden @md:grid gap-x-6 grid-cols-4 shadow-lg p-6 pt-5 left-0 right-0 outline-none z-sticky max-h-[calc(100vh-300px)] overflow-y-auto',
-              submenuGridAlignmentClass,
+              'hidden @md:flex @md:flex-col gap-1 shadow-lg rounded-md p-4 outline-none z-sticky',
+              'absolute top-full left-0 min-w-[220px] w-max max-w-sm max-h-[calc(100vh-300px)] overflow-y-auto',
             ]"
             @keydown.esc="focusTrigger(index)"
             @keydown.up="navigateDropdownItems($event, 'up')"
@@ -238,7 +244,7 @@ const router = useRouter();
 const { close, open, isOpen, activeNode, category, setCategory } = useMegaMenu();
 const { data: fetchedCategoryTree, getCategoryTree } = useCategoryTree();
 
-const { referenceRef, floatingRef, style } = useDropdown({
+const { referenceRef, floatingRef } = useDropdown({
   isOpen,
   onClose: close,
   placement: 'bottom-start',
@@ -323,17 +329,6 @@ const submenuTextAlignmentClass = computed(() => {
       return 'text-right';
     default:
       return 'text-left';
-  }
-});
-
-const submenuGridAlignmentClass = computed(() => {
-  switch (resolvedContent.value.text.textAlignment) {
-    case 'center':
-      return 'justify-items-center';
-    case 'right':
-      return 'justify-items-end';
-    default:
-      return 'justify-items-start';
   }
 });
 
