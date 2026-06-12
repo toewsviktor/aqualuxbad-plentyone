@@ -1,9 +1,9 @@
 import type { HorizontalSpacingKey } from './types';
 
 const MAP: Record<HorizontalSpacingKey, string> = {
-  s: 'max-w-screen-3xl',
+  s: 'max-w-screen-xl',
   m: 'max-w-screen-2xl',
-  l: 'max-w-screen-xl',
+  l: 'max-w-screen-3xl',
 };
 
 export const DEFAULT_HORIZONTAL_CLASS = 'max-w-screen-3xl';

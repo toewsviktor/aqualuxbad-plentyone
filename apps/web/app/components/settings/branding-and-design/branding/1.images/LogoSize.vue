@@ -4,11 +4,11 @@
     <div class="flex gap-3 mt-1">
       <label class="flex-1">
         <span class="block typography-text-xs text-neutral-700 mb-1">{{ getEditorTranslation('width-label') }}</span>
-        <SfInput v-model="logoMaxWidth" type="number" min="0" data-testid="logo-max-width" />
+        <SfInput v-model="logoWidth" type="text" placeholder="auto" data-testid="logo-width" />
       </label>
       <label class="flex-1">
         <span class="block typography-text-xs text-neutral-700 mb-1">{{ getEditorTranslation('height-label') }}</span>
-        <SfInput v-model="logoMaxHeight" type="number" min="0" data-testid="logo-max-height" />
+        <SfInput v-model="logoHeight" type="text" placeholder="auto" data-testid="logo-height" />
       </label>
     </div>
     <div class="py-3">
@@ -22,15 +22,15 @@
 <script setup lang="ts">
 import { SfInput } from '@storefront-ui/vue';
 
-const { updateSetting: updateWidth, getSetting: getWidth } = useSiteSettings('logoMaxWidth');
-const { updateSetting: updateHeight, getSetting: getHeight } = useSiteSettings('logoMaxHeight');
+const { updateSetting: updateWidth, getSetting: getWidth } = useSiteSettings('logoWidth');
+const { updateSetting: updateHeight, getSetting: getHeight } = useSiteSettings('logoHeight');
 
-const logoMaxWidth = computed({
+const logoWidth = computed({
   get: () => getWidth(),
   set: (value) => updateWidth(value),
 });
 
-const logoMaxHeight = computed({
+const logoHeight = computed({
   get: () => getHeight(),
   set: (value) => updateHeight(value),
 });
@@ -40,15 +40,15 @@ const logoMaxHeight = computed({
 {
   "en": {
     "label": "Logo size",
-    "width-label": "Max width (px)",
-    "height-label": "Max height (px)",
-    "description": "Maximum logo dimensions in pixels. The aspect ratio is kept."
+    "width-label": "Width",
+    "height-label": "Height",
+    "description": "Enter a pixel value (e.g. 150) or 'auto' for one side. With one side set to auto, the other scales proportionally."
   },
   "de": {
     "label": "Logo-Größe",
-    "width-label": "Max. Breite (px)",
-    "height-label": "Max. Höhe (px)",
-    "description": "Maximale Logo-Abmessungen in Pixeln. Das Seitenverhältnis bleibt erhalten."
+    "width-label": "Breite",
+    "height-label": "Höhe",
+    "description": "Pixelwert (z.B. 150) oder 'auto' pro Seite eingeben. Steht eine Seite auf auto, skaliert die andere proportional."
   }
 }
 </i18n>

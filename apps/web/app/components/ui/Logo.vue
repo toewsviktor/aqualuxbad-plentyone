@@ -7,8 +7,6 @@
         :alt="`${storeName} logo`"
         class="py-2"
         :style="logoStyle"
-        width="150"
-        height="40"
         preload
       />
     </template>
@@ -30,16 +28,21 @@
 <script setup lang="ts">
 const runtimeConfig = useRuntimeConfig();
 const { getSetting: getHeaderLogo } = useSiteSettings('headerLogo');
-const { getSetting: getLogoMaxWidth } = useSiteSettings('logoMaxWidth');
-const { getSetting: getLogoMaxHeight } = useSiteSettings('logoMaxHeight');
+const { getSetting: getLogoWidth } = useSiteSettings('logoWidth');
+const { getSetting: getLogoHeight } = useSiteSettings('logoHeight');
 
 const headerLogo = computed(() => getHeaderLogo());
 
+// Accepts a raw pixel number (e.g. "150"), an explicit unit ("150px"), or "auto"/empty for proportional scaling.
+const toDimension = (value: string): string => {
+  const trimmed = (value ?? '').toString().trim();
+  if (!trimmed || trimmed.toLowerCase() === 'auto') return 'auto';
+  return /^\d+(\.\d+)?$/.test(trimmed) ? `${trimmed}px` : trimmed;
+};
+
 const logoStyle = computed(() => ({
-  maxWidth: `${getLogoMaxWidth()}px`,
-  maxHeight: `${getLogoMaxHeight()}px`,
-  width: 'auto',
-  height: 'auto',
+  width: toDimension(getLogoWidth()),
+  height: toDimension(getLogoHeight()),
 }));
 
 const storeName = runtimeConfig.public.storename;
